@@ -55,12 +55,72 @@ namespace WinAppMediaPlayerClientVersie2
                     bgWorkerOntvang.RunWorkerAsync();//start ontvangen data
                     btnZoekServer.Enabled = false;
                     btnVerbreek.Enabled = true;
-                    //SplitContainer1.Panel2.Enabled = true;
+                    tssClient.Text = "Client verbonden";
+                    tssClient.ForeColor = Color.Green;
                 }
             }
             catch (Exception)
             {
                 txtMelding.AppendText("Kan geen verbinding maken!\r\n");
+            }
+        }
+
+        private void bgWorkerOntvang_DoWork(object sender, DoWorkEventArgs e)
+        {
+            while (client.Connected)
+            {
+                string bericht;
+                try
+                {
+                    bericht = Reader.ReadLine();
+                    if (bericht == "Disconnect")
+                    {
+                        txtMelding.AppendText("verbinding verbroken door server\r\n");
+                        break;
+                    }
+                    this.txtCommunicatie.Invoke(new MethodInvoker(delegate () { txtCommunicatie.AppendText(bericht + "\r\n"); }));
+                }
+                catch (Exception)
+                {
+                    this.txtMelding.Invoke(new MethodInvoker(delegate () { txtMelding.AppendText("Kan bericht niet ontvangen.\r\n"); }));
+                }
+            }
+        }
+
+        private void bgWorkerOntvang_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            txtMelding.AppendText("Verbinding met server werd verbroken\r\n");
+            btnVerbreek.Enabled = false;
+            btnZoekServer.Enabled = true;
+        }
+
+        private void btnZend_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Writer.WriteLine("CLIENT>>>" + txtBericht.Text);
+                txtCommunicatie.AppendText("CLIENT>>>" + txtBericht.Text + "\r\n");
+            }
+            catch
+            {
+                txtMelding.AppendText("Bericht zenden mislukt");
+            }
+        }
+
+        private void btnVerbreek_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Writer.WriteLine("Disconnect");
+                bgWorkerOntvang.CancelAsync();
+                client.Close();
+                txtMelding.AppendText("Verbinding verbroken door Client!\r\n");
+                tssClient.Text = "Client niet verbonden";
+                tssClient.ForeColor = Color.Red;
+            }
+            catch
+            {
+                txtMelding.AppendText("Verbinding verbreken door Client mislukt!\r\n");
             }
         }
     }   
