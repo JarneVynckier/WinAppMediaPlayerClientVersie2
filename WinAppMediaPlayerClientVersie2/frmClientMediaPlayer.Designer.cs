@@ -117,7 +117,7 @@ namespace WinAppMediaPlayerClientVersie2
             this.splitContainer1.Panel2.Controls.Add(this.tableLayoutPanel2);
             this.splitContainer1.Panel2.Enabled = false;
             this.splitContainer1.Size = new System.Drawing.Size(700, 582);
-            this.splitContainer1.SplitterDistance = 484;
+            this.splitContainer1.SplitterDistance = 485;
             this.splitContainer1.SplitterWidth = 3;
             this.splitContainer1.TabIndex = 1;
             // 
@@ -140,7 +140,7 @@ namespace WinAppMediaPlayerClientVersie2
             this.splitContainer2.Panel2.AutoScroll = true;
             this.splitContainer2.Panel2.Controls.Add(this.txtCommunicatie);
             this.splitContainer2.Panel2.Controls.Add(this.label4);
-            this.splitContainer2.Size = new System.Drawing.Size(700, 412);
+            this.splitContainer2.Size = new System.Drawing.Size(700, 413);
             this.splitContainer2.SplitterDistance = 245;
             this.splitContainer2.SplitterWidth = 3;
             this.splitContainer2.TabIndex = 1;
@@ -177,7 +177,7 @@ namespace WinAppMediaPlayerClientVersie2
             this.txtCommunicatie.Multiline = true;
             this.txtCommunicatie.Name = "txtCommunicatie";
             this.txtCommunicatie.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtCommunicatie.Size = new System.Drawing.Size(700, 139);
+            this.txtCommunicatie.Size = new System.Drawing.Size(700, 140);
             this.txtCommunicatie.TabIndex = 2;
             // 
             // label4
@@ -303,7 +303,7 @@ namespace WinAppMediaPlayerClientVersie2
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 16F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(700, 95);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(700, 94);
             this.tableLayoutPanel2.TabIndex = 6;
             // 
             // txtBericht
@@ -322,7 +322,7 @@ namespace WinAppMediaPlayerClientVersie2
             this.btnZend.Location = new System.Drawing.Point(2, 50);
             this.btnZend.Margin = new System.Windows.Forms.Padding(2);
             this.btnZend.Name = "btnZend";
-            this.btnZend.Size = new System.Drawing.Size(746, 43);
+            this.btnZend.Size = new System.Drawing.Size(746, 42);
             this.btnZend.TabIndex = 8;
             this.btnZend.Text = "Stuur bericht naar Server";
             this.btnZend.UseVisualStyleBackColor = true;

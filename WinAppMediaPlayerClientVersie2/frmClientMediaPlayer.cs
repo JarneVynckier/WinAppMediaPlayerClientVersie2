@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using System.Net.Sockets; //TCPClient en TCPServer verbinden
 using System.Net; //IPadressen gebruiken
 using System.IO; //berichten versturen en ontvangen
-
+using System.Threading;
 
 namespace WinAppMediaPlayerClientVersie2
 {
@@ -26,6 +26,7 @@ namespace WinAppMediaPlayerClientVersie2
 
         private void btnZoekServer_Click(object sender, EventArgs e)
         {
+            
             //controle IP-adres
             IPAddress ipadres;
             int poortNr;
@@ -55,6 +56,7 @@ namespace WinAppMediaPlayerClientVersie2
                     bgWorkerOntvang.RunWorkerAsync();//start ontvangen data
                     btnZoekServer.Enabled = false;
                     btnVerbreek.Enabled = true;
+                    splitContainer1.Panel2.Enabled = true;
                     tssClient.Text = "Client verbonden";
                     tssClient.ForeColor = Color.Green;
                 }
@@ -112,6 +114,7 @@ namespace WinAppMediaPlayerClientVersie2
             try
             {
                 Writer.WriteLine("Disconnect");
+                Thread.Sleep(20);
                 bgWorkerOntvang.CancelAsync();
                 client.Close();
                 txtMelding.AppendText("Verbinding verbroken door Client!\r\n");
