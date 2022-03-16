@@ -26,7 +26,7 @@ namespace WinAppMediaPlayerClientVersie2
 
         private void btnZoekServer_Click(object sender, EventArgs e)
         {
-            
+
             //controle IP-adres
             IPAddress ipadres;
             int poortNr;
@@ -59,6 +59,7 @@ namespace WinAppMediaPlayerClientVersie2
                     splitContainer1.Panel2.Enabled = true;
                     tssClient.Text = "Client verbonden";
                     tssClient.ForeColor = Color.Green;
+                    txtMelding.AppendText("Client verbonden");
                 }
             }
             catch (Exception)
@@ -79,6 +80,16 @@ namespace WinAppMediaPlayerClientVersie2
                     {
                         txtMelding.AppendText("verbinding verbroken door server\r\n");
                         break;
+                    }
+                    if (bericht.Contains("SONGLISTADD"))
+                    {
+                        this.lstSong.Invoke(new MethodInvoker(delegate () { lstSong.Items.Add(bericht.Remove(0, 12)); }));
+                        
+                    }
+                    if (bericht.Contains("PLAYLISTADD"))
+                    {
+                        this.lstSongPlayList.Invoke(new MethodInvoker(delegate () { lstSongPlayList.Items.Add(bericht.Remove(0, 12)); }));
+                        
                     }
                     this.txtCommunicatie.Invoke(new MethodInvoker(delegate () { txtCommunicatie.AppendText(bericht + "\r\n"); }));
                 }
@@ -114,7 +125,7 @@ namespace WinAppMediaPlayerClientVersie2
             try
             {
                 Writer.WriteLine("Disconnect");
-                Thread.Sleep(20);
+               
                 bgWorkerOntvang.CancelAsync();
                 client.Close();
                 txtMelding.AppendText("Verbinding verbroken door Client!\r\n");
@@ -126,5 +137,12 @@ namespace WinAppMediaPlayerClientVersie2
                 txtMelding.AppendText("Verbinding verbreken door Client mislukt!\r\n");
             }
         }
-    }   
+
+        private void btnVoegToePlayList_Click(object sender, EventArgs e)
+        {
+            if (lstSong.SelectedIndex == -1) return; //niets geselecteerd
+            if (lstSongPlayList.Items.Contains(lstSongPlayList.SelectedItem.ToString())) { MessageBox.Show("Deze song bestaat al!"); return; }
+            lstSongPlayList.Items.Add(lstSongPlayList.SelectedItem);
+        }
+    }
 }
