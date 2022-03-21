@@ -144,5 +144,15 @@ namespace WinAppMediaPlayerClientVersie2
             if (lstSongPlayList.Items.Contains(lstSongPlayList.SelectedItem.ToString())) { MessageBox.Show("Deze song bestaat al!"); return; }
             lstSongPlayList.Items.Add(lstSongPlayList.SelectedItem);
         }
+
+        private void btnPlay_Click(object sender, EventArgs e)
+        {
+            Writer.WriteLine("start");
+        }
+
+        private void btnStopPlay_Click(object sender, EventArgs e)
+        {
+            Writer.WriteLine("stop");
+        }
     }
 }
